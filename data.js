@@ -5,6 +5,9 @@ const cvData = {
         title: "Ph.D. Candidate in Medical Physics",
         affiliation: "University of Science and Technology of China (USTC)",
         introBlurb: "I am a Ph.D. candidate in Medical Physics at USTC, passionate about leveraging cutting-edge technology to improve healthcare. My research focuses on the intersection of deep learning, quality assurance in radiotherapy, radiation detectors, and exploring the potential of Large Language Models in medical applications.",
+        // detailedAbout and researchInterests can be kept here if you plan to use them elsewhere,
+        // but the 'About' section displaying them is removed.
+        // For now, they are not directly used by script.js for display in a dedicated 'About' section.
         detailedAbout: `
             <p class="mb-4 text-lg text-gray-700">I am currently pursuing my Ph.D. in Medical Physics at the esteemed University of Science and Technology of China (USTC). My academic journey began with a B.S. in Nuclear Engineering and Technology from Harbin Engineering University, which laid a strong foundation for my current research pursuits.</p>
             <p class="mb-4 text-lg text-gray-700">My primary motivation is to contribute to advancements in medical treatment through innovative technological solutions. I am particularly fascinated by the potential of artificial intelligence and sophisticated detection systems to enhance the precision and safety of radiotherapy procedures.</p>
@@ -16,7 +19,8 @@ const cvData = {
             { name: "Radiation Detectors", description: "Investigating and developing advanced detector technologies, such as flexible scintillators, for improved radiation measurement and imaging." },
             { name: "Large Language Models (LLMs)", description: "Exploring applications of LLMs in medical physics for tasks like information retrieval, report generation, or enhancing clinical workflows." }
         ],
-        pictureUrl: "assets/my_photo.jpg",
+        pictureUrl: "assets/placeholder_profile.jpg", // 替换为你的照片路径
+        cvUrl: "assets/Ning_Gao_CV.pdf",        // 你的CV PDF路径
         contact: {
             email: "gn8022@mail.ustc.edu.cn",
             phone: "(86) 18555689295",
@@ -29,8 +33,9 @@ const cvData = {
             { name: "GitHub", icon: "fab fa-github", url: "#" }
         ]
     },
-    navigation: [ // "Notepad" removed from here
+    navigation: [ // Navigation updated
         { name: "Home", id: "hero" },
+        { name: "Education", id: "education"}, // Added Education to nav
         { name: "Research", id: "research-experience" },
         { name: "Publications", id: "publications" },
         { name: "News & Awards", id: "news-rewards" },
@@ -67,8 +72,19 @@ const cvData = {
         { date: "2025 (Ant.)", content: "Lead-authored paper on EPID-based 3D dose reconstruction accepted in Physics in Medicine and Biology.", icon: "fas fa-file-alt" }
     ],
     rewards: [
-        { name: "First Prize, Graduate Scholarship", institution: "USTC", year: "2020-2023", icon: "fas fa-award" },
+        { name: "First Prize, Graduate Scholarship", institution: "USTC", year: "2020, 2021, 2022, 2023", icon: "fas fa-award" },
+        { name: "Second Prize, Graduate Scholarship", institution: "USTC", year: "2024", icon: "fas fa-award" },
         { name: "AAPM Blue Ribbon Poster", institution: "AAPM 66th Annual Meeting", year: "2024", icon: "fas fa-medal" }
     ],
+    // Skills data can be kept if you plan to display it elsewhere,
+    // but the section that displayed it ('About') is now removed.
+    skills: [
+        { category: "Programming", items: ["Python", "C++"] },
+        { category: "Monte Carlo", items: ["ARCHER", "TOPAS", "MCNP", "GEANT4"] },
+        { category: "Radiotherapy", items: ["LINAC (Varian)", "QA (PTW, IBA)", "TPS Eclipse", "Aria"] },
+        { category: "Radiology", items: ["X-ray Systems", "CT Recon (FBP)", "Radiation Protection"] },
+        { category: "Languages", items: ["English (Fluent)", "Chinese (Native)"] }
+    ],
+    // notepadContent removed as the section is removed
     logoText: "Ning GAO"
 };

@@ -1,26 +1,36 @@
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Destructure skills and notepadContent, but they might be undefined if removed from data.js
-    const { personalInfo, navigation, education, researchExperience, publications, news, rewards, /* skills, notepadContent, */ logoText } = cvData;
+    // Destructure only the data that will be used
+    const { personalInfo, navigation, education, researchExperience, publications, news, rewards, logoText } = cvData;
 
-    // Utility Function to bold your name
+    // --- Utility Function to bold your name ---
     function formatAuthors(authorsStr) {
         if (!authorsStr) return '';
         return authorsStr.replace(/Gao N(,| |$)/gi, '<strong>Gao N</strong>$1');
     }
     
-    // Populate Logo Texts
-    document.getElementById('logo-text-header').textContent = logoText;
-    document.getElementById('logo-text-footer').textContent = logoText;
+    // --- Populate Logo Texts ---
+    const logoHeader = document.getElementById('logo-text-header');
+    const logoFooter = document.getElementById('logo-text-footer');
+    if (logoHeader) logoHeader.textContent = logoText;
+    if (logoFooter) logoFooter.textContent = logoText;
 
-    // Populate Hero Section
-    document.getElementById('hero-name').textContent = personalInfo.name;
-    document.getElementById('hero-title').textContent = personalInfo.title;
-    document.getElementById('hero-description').innerHTML = personalInfo.introBlurb;
-    document.getElementById('hero-image').src = personalInfo.pictureUrl;
-    document.getElementById('hero-image').alt = personalInfo.name;
+    // --- Populate Hero Section ---
+    const heroName = document.getElementById('hero-name');
+    const heroTitle = document.getElementById('hero-title');
+    const heroDescription = document.getElementById('hero-description');
+    const heroImage = document.getElementById('hero-image');
 
-    // Timeline Item Creator (for Education & Research)
+    if (heroName) heroName.textContent = personalInfo.name;
+    if (heroTitle) heroTitle.textContent = personalInfo.title;
+    if (heroDescription) heroDescription.innerHTML = personalInfo.introBlurb;
+    if (heroImage) {
+        heroImage.src = personalInfo.pictureUrl;
+        heroImage.alt = personalInfo.name;
+    }
+    // CV button and Learn More button were removed from HTML, so no JS needed for them.
+
+    // --- Timeline Item Creator (for Education & Research) ---
     function createTimelineItem(item, isLast = false, type = 'education') {
         const iconClass = type === 'education' ? 'fas fa-graduation-cap' : 'fas fa-flask';
         const companyOrInstitution = item.institution || item.company || '';
@@ -61,10 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Populate Publications
+    // --- Populate Publications ---
     const publicationsContainer = document.getElementById('publications-content');
     if (publicationsContainer && publications) {
         let pubHtml = '';
+
         if (publications.journalPapers && publications.journalPapers.length > 0) {
             pubHtml += `<div class="animate-fade-in"><h3 class="text-2xl font-semibold text-gray-800 mb-6">Journal Papers</h3><div class="space-y-6">`;
             publications.journalPapers.forEach(pub => {
@@ -110,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
         publicationsContainer.innerHTML = pubHtml;
     }
 
-    // Populate News & Rewards
+    // --- Populate News & Rewards ---
     const newsList = document.getElementById('news-list');
     if (newsList && news && news.length > 0) {
         news.forEach(item => {
@@ -124,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>`;
         });
     }
-
     const rewardsList = document.getElementById('rewards-list');
     if (rewardsList && rewards && rewards.length > 0) {
         rewards.forEach(item => {
@@ -138,8 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>`;
         });
     }
-
-    // Populate Contact Information
+    
+    // --- Populate Contact Information ---
     const contactInfoContainer = document.getElementById('contact-info-details');
     if (contactInfoContainer && personalInfo.contact) {
         const { email, phone, address } = personalInfo.contact;
@@ -176,7 +186,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         contactInfoContainer.innerHTML = contactHtml;
     }
-    
     const socialLinksContactContainer = document.getElementById('social-links-contact');
     if (socialLinksContactContainer && personalInfo.socialLinks) {
         personalInfo.socialLinks.forEach(link => {
@@ -187,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Populate Navigation Menus
+    // --- Populate Navigation Menus (Desktop & Mobile) ---
     const navMenuUl = document.querySelector('#nav-menu ul');
     const mobileMenuUl = document.querySelector('#mobile-menu ul');
     if (navigation && navMenuUl && mobileMenuUl) {
@@ -199,16 +208,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Populate Footer Links
+    // --- Populate Footer Links ---
     const footerLinksContainer = document.getElementById('footer-links');
     if (footerLinksContainer && navigation) {
-        navigation.slice(0, 4).forEach(item => {
+        navigation.slice(0, 4).forEach(item => { 
              footerLinksContainer.innerHTML += `<a href="#${item.id}" class="text-gray-400 hover:text-white transition-colors text-sm">${item.name}</a>`;
         });
     }
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const currentYearEl = document.getElementById('current-year');
+    if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
 
-    // Event Listeners & UI Enhancements
+
+    // --- Event Listeners & UI Enhancements ---
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuButton && mobileMenu) {
@@ -229,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            if (href === "#") {
+            if (href === "#") { 
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
@@ -279,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1 }); 
 
     animatedElements.forEach(el => {
         observer.observe(el);
