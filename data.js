@@ -17,7 +17,6 @@ const cvData = {
             { name: "Large Language Models (LLMs)", description: "Exploring applications of LLMs in medical physics for tasks like information retrieval, report generation, or enhancing clinical workflows." }
         ],
         pictureUrl: "assets/my_photo.jpg",
-        cvUrl: "assets/Ning_Gao_CV.pdf", // Kept in case you want a CV link elsewhere later
         contact: {
             email: "gn8022@mail.ustc.edu.cn",
             phone: "(86) 18555689295",
@@ -30,13 +29,11 @@ const cvData = {
             { name: "GitHub", icon: "fab fa-github", url: "#" }
         ]
     },
-    navigation: [ // For header navigation
+    navigation: [ // "Notepad" removed from here
         { name: "Home", id: "hero" },
-        { name: "About", id: "about" },
         { name: "Research", id: "research-experience" },
         { name: "Publications", id: "publications" },
         { name: "News & Awards", id: "news-rewards" },
-        // { name: "Notepad", id: "notepad" }, // Removed
         { name: "Contact", id: "contact" }
     ],
     education: [
@@ -67,10 +64,10 @@ const cvData = {
     news: [
         { date: "July 2024", content: "Presenting two research projects (one oral, one blue ribbon poster) at the AAPM 66th Annual Meeting in Los Angeles, CA.", icon: "fas fa-bullhorn" },
         { date: "2024", content: "Co-authored paper 'A bulk Schottky junction...' published in Nature Communications.", icon: "fas fa-newspaper" },
-        { date: "2025", content: "Lead-authored paper on EPID-based 3D dose reconstruction accepted in Physics in Medicine and Biology.", icon: "fas fa-file-alt" }
+        { date: "2025 (Ant.)", content: "Lead-authored paper on EPID-based 3D dose reconstruction accepted in Physics in Medicine and Biology.", icon: "fas fa-file-alt" }
     ],
     rewards: [
-        { name: "First Prize, Graduate Scholarship", institution: "USTC", year: "2020-2024", icon: "fas fa-award" },
+        { name: "First Prize, Graduate Scholarship", institution: "USTC", year: "2020-2023", icon: "fas fa-award" },
         { name: "AAPM Blue Ribbon Poster", institution: "AAPM 66th Annual Meeting", year: "2024", icon: "fas fa-medal" }
     ],
     logoText: "Ning GAO"

@@ -19,41 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('hero-description').innerHTML = personalInfo.introBlurb;
     document.getElementById('hero-image').src = personalInfo.pictureUrl;
     document.getElementById('hero-image').alt = personalInfo.name;
-    // CV Button logic removed as button is removed from HTML
-    // const cvButton = document.getElementById('hero-cv-button'); 
-    // if (cvButton && personalInfo.cvUrl) { ... }
-
-
-    // Populate About Section
-    const aboutContentMain = document.getElementById('about-content-main');
-    if (aboutContentMain) {
-        let aboutHtml = personalInfo.detailedAbout;
-        if (personalInfo.researchInterests && personalInfo.researchInterests.length > 0) {
-            aboutHtml += `<ul class="list-disc list-inside space-y-2 text-lg text-gray-700 mt-4">`;
-            personalInfo.researchInterests.forEach(interest => {
-                aboutHtml += `<li><strong>${interest.name}:</strong> ${interest.description}</li>`;
-            });
-            aboutHtml += `</ul>`;
-        }
-        aboutContentMain.innerHTML = aboutHtml;
-    }
-    
-    // Populate Skills in About Section - REMOVED
-    // const skillsListContainer = document.getElementById('skills-list');
-    // if (skillsListContainer && cvData.skills && cvData.skills.length > 0) { // Check if skills exists in cvData
-    //     let skillsHtml = '';
-    //     cvData.skills.forEach(skillCat => {
-    //         skillsHtml += `<div class="mb-4 animate-fade-in delay-200">
-    //             <h4 class="text-lg font-semibold text-blue-700 mb-2">${skillCat.category}</h4>
-    //             <div class="flex flex-wrap gap-2">`;
-    //         skillCat.items.forEach(item => {
-    //             skillsHtml += `<span class="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded-full shadow-sm">${item}</span>`;
-    //         });
-    //         skillsHtml += `</div></div>`;
-    //     });
-    //     skillsListContainer.innerHTML = skillsHtml;
-    // }
-
 
     // Timeline Item Creator (for Education & Research)
     function createTimelineItem(item, isLast = false, type = 'education') {
@@ -159,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>`;
         });
     }
+
     const rewardsList = document.getElementById('rewards-list');
     if (rewardsList && rewards && rewards.length > 0) {
         rewards.forEach(item => {
@@ -172,13 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>`;
         });
     }
-    
-    // Populate Notepad - REMOVED
-    // const notepadContainer = document.getElementById('notepad-content');
-    // if (notepadContainer && cvData.notepadContent) { // Check if notepadContent exists
-    //     notepadContainer.innerHTML = cvData.notepadContent;
-    //     notepadContainer.classList.add('animate-fade-in');
-    // }
 
     // Populate Contact Information
     const contactInfoContainer = document.getElementById('contact-info-details');
@@ -217,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         contactInfoContainer.innerHTML = contactHtml;
     }
+    
     const socialLinksContactContainer = document.getElementById('social-links-contact');
     if (socialLinksContactContainer && personalInfo.socialLinks) {
         personalInfo.socialLinks.forEach(link => {
