@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom CSS for animations and minor adjustments if needed */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -18,7 +17,7 @@
         
         .gradient-text {
             background-clip: text; -webkit-background-clip: text; color: transparent;
-            background-image: linear-gradient(90deg, #3b82f6, #1e40af); /* USTC Blue shades */
+            background-image: linear-gradient(90deg, #3b82f6, #1e40af);
         }
         .card-hover:hover {
             transform: translateY(-5px);
@@ -29,8 +28,7 @@
             background: linear-gradient(90deg, #3b82f6, #1e40af);
             margin: 16px auto; border-radius: 2px;
         }
-        /* Ensure fixed header doesn't overlap content */
-        html { scroll-padding-top: 80px; /* Adjust based on actual header height */ }
+        html { scroll-padding-top: 80px; }
     </style>
 </head>
 <body class="bg-gray-100 font-sans text-gray-800">
@@ -51,7 +49,6 @@
                 </button>
             </div>
         </div>
-        <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white w-full px-4 sm:px-6 py-4 shadow-lg absolute top-full left-0">
             <ul class="space-y-3">
                 <!-- Mobile navigation items will be added by JavaScript -->
@@ -69,14 +66,7 @@
                     <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto md:mx-0" id="hero-description">
                         [Brief introduction]
                     </p>
-                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
-                        <a id="hero-cv-button" href="#" target="_blank" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all transform hover:scale-105 inline-block">
-                            <i class="fas fa-file-pdf mr-2"></i>View CV
-                        </a>
-                        <a href="#about" class="px-8 py-3 border-2 border-blue-600 text-blue-700 rounded-lg font-medium hover:bg-blue-50 transition-all transform hover:scale-105 inline-block">
-                            Learn More About Me
-                        </a>
-                    </div>
+                    <!-- Buttons Removed -->
                 </div>
                 <div class="md:w-1/3 flex justify-center animate-fade-in delay-200">
                     <div class="relative w-60 h-60 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl transform hover:scale-105 transition-transform duration-300">
@@ -97,12 +87,7 @@
             <div id="about-content-main" class="max-w-3xl mx-auto animate-fade-in">
                 <!-- Detailed about content and research interests will be added by JavaScript -->
             </div>
-             <div class="mt-12 animate-fade-in delay-100">
-                <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">My Skills</h3>
-                <div id="skills-list" class="max-w-4xl mx-auto">
-                    <!-- Skills will be added by JavaScript as categorized tags -->
-                </div>
-            </div>
+             <!-- Skills Section Removed -->
         </div>
     </section>
 
@@ -169,18 +154,8 @@
         </div>
     </section>
 
-    <!-- Notepad Component -->
-    <section id="notepad" class="py-16 px-4 sm:px-6 bg-gray-50">
-        <div class="container mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-2">Notepad</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div id="notepad-content" class="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg prose prose-indigo">
-                <!-- Notepad content will be added by JavaScript -->
-            </div>
-        </div>
-    </section>
+    <!-- Notepad Component Removed -->
+    <!-- <section id="notepad" class="py-16 px-4 sm:px-6 bg-gray-50"> ... </section> -->
 
     <!-- Contact Component -->
     <section id="contact" class="py-16 px-4 sm:px-6 bg-gradient-to-br from-blue-50 via-gray-50 to-indigo-50">
@@ -222,7 +197,6 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
     <button id="back-to-top" class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-40">
         <i class="fas fa-arrow-up"></i>
     </button>

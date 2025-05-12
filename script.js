@@ -1,32 +1,30 @@
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
-    const { personalInfo, navigation, education, researchExperience, publications, news, rewards, skills, notepadContent, logoText } = cvData;
+    // Destructure skills and notepadContent, but they might be undefined if removed from data.js
+    const { personalInfo, navigation, education, researchExperience, publications, news, rewards, /* skills, notepadContent, */ logoText } = cvData;
 
-    // --- Utility Function to bold your name ---
+    // Utility Function to bold your name
     function formatAuthors(authorsStr) {
         if (!authorsStr) return '';
         return authorsStr.replace(/Gao N(,| |$)/gi, '<strong>Gao N</strong>$1');
     }
     
-    // --- Populate Logo Texts ---
+    // Populate Logo Texts
     document.getElementById('logo-text-header').textContent = logoText;
     document.getElementById('logo-text-footer').textContent = logoText;
 
-    // --- Populate Hero Section ---
+    // Populate Hero Section
     document.getElementById('hero-name').textContent = personalInfo.name;
     document.getElementById('hero-title').textContent = personalInfo.title;
-    document.getElementById('hero-description').innerHTML = personalInfo.introBlurb; // Use innerHTML if blurb contains HTML
+    document.getElementById('hero-description').innerHTML = personalInfo.introBlurb;
     document.getElementById('hero-image').src = personalInfo.pictureUrl;
     document.getElementById('hero-image').alt = personalInfo.name;
-    const cvButton = document.getElementById('hero-cv-button');
-    if (cvButton && personalInfo.cvUrl) {
-        cvButton.href = personalInfo.cvUrl;
-    } else if (cvButton) {
-        cvButton.style.display = 'none'; // Hide if no CV URL
-    }
+    // CV Button logic removed as button is removed from HTML
+    // const cvButton = document.getElementById('hero-cv-button'); 
+    // if (cvButton && personalInfo.cvUrl) { ... }
 
 
-    // --- Populate About Section ---
+    // Populate About Section
     const aboutContentMain = document.getElementById('about-content-main');
     if (aboutContentMain) {
         let aboutHtml = personalInfo.detailedAbout;
@@ -40,24 +38,24 @@ document.addEventListener('DOMContentLoaded', function() {
         aboutContentMain.innerHTML = aboutHtml;
     }
     
-    // Populate Skills in About Section
-    const skillsListContainer = document.getElementById('skills-list');
-    if (skillsListContainer && skills.length > 0) {
-        let skillsHtml = '';
-        skills.forEach(skillCat => {
-            skillsHtml += `<div class="mb-4 animate-fade-in delay-200">
-                <h4 class="text-lg font-semibold text-blue-700 mb-2">${skillCat.category}</h4>
-                <div class="flex flex-wrap gap-2">`;
-            skillCat.items.forEach(item => {
-                skillsHtml += `<span class="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded-full shadow-sm">${item}</span>`;
-            });
-            skillsHtml += `</div></div>`;
-        });
-        skillsListContainer.innerHTML = skillsHtml;
-    }
+    // Populate Skills in About Section - REMOVED
+    // const skillsListContainer = document.getElementById('skills-list');
+    // if (skillsListContainer && cvData.skills && cvData.skills.length > 0) { // Check if skills exists in cvData
+    //     let skillsHtml = '';
+    //     cvData.skills.forEach(skillCat => {
+    //         skillsHtml += `<div class="mb-4 animate-fade-in delay-200">
+    //             <h4 class="text-lg font-semibold text-blue-700 mb-2">${skillCat.category}</h4>
+    //             <div class="flex flex-wrap gap-2">`;
+    //         skillCat.items.forEach(item => {
+    //             skillsHtml += `<span class="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded-full shadow-sm">${item}</span>`;
+    //         });
+    //         skillsHtml += `</div></div>`;
+    //     });
+    //     skillsListContainer.innerHTML = skillsHtml;
+    // }
 
 
-    // --- Timeline Item Creator (for Education & Research) ---
+    // Timeline Item Creator (for Education & Research)
     function createTimelineItem(item, isLast = false, type = 'education') {
         const iconClass = type === 'education' ? 'fas fa-graduation-cap' : 'fas fa-flask';
         const companyOrInstitution = item.institution || item.company || '';
@@ -84,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Populate Education Timeline
     const educationContainer = document.getElementById('education-timeline');
-    if (educationContainer && education.length > 0) {
+    if (educationContainer && education && education.length > 0) {
         education.forEach((edu, index) => {
             educationContainer.innerHTML += createTimelineItem(edu, index === education.length - 1, 'education');
         });
@@ -92,18 +90,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Populate Research Experience Timeline
     const researchContainer = document.getElementById('research-timeline');
-    if (researchContainer && researchExperience.length > 0) {
+    if (researchContainer && researchExperience && researchExperience.length > 0) {
         researchExperience.forEach((exp, index) => {
             researchContainer.innerHTML += createTimelineItem(exp, index === researchExperience.length - 1, 'research');
         });
     }
 
-    // --- Populate Publications ---
+    // Populate Publications
     const publicationsContainer = document.getElementById('publications-content');
-    if (publicationsContainer) {
+    if (publicationsContainer && publications) {
         let pubHtml = '';
-
-        // Journal Papers
         if (publications.journalPapers && publications.journalPapers.length > 0) {
             pubHtml += `<div class="animate-fade-in"><h3 class="text-2xl font-semibold text-gray-800 mb-6">Journal Papers</h3><div class="space-y-6">`;
             publications.journalPapers.forEach(pub => {
@@ -118,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             pubHtml += `</div></div>`;
         }
-        // Conference Abstracts
         if (publications.conferenceAbstracts && publications.conferenceAbstracts.length > 0) {
             pubHtml += `<div class="mt-10 animate-fade-in delay-100"><h3 class="text-2xl font-semibold text-gray-800 mb-6">Conference Presentations & Abstracts</h3><div class="space-y-6">`;
             publications.conferenceAbstracts.forEach(conf => {
@@ -133,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             pubHtml += `</div></div>`;
         }
-        // Patents
         if (publications.patents && publications.patents.length > 0) {
             pubHtml += `<div class="mt-10 animate-fade-in delay-200"><h3 class="text-2xl font-semibold text-gray-800 mb-6">Patents</h3><div class="space-y-6">`;
             publications.patents.forEach(pat => {
@@ -151,9 +145,9 @@ document.addEventListener('DOMContentLoaded', function() {
         publicationsContainer.innerHTML = pubHtml;
     }
 
-    // --- Populate News & Rewards ---
+    // Populate News & Rewards
     const newsList = document.getElementById('news-list');
-    if (newsList && news.length > 0) {
+    if (newsList && news && news.length > 0) {
         news.forEach(item => {
             newsList.innerHTML += `
                 <div class="bg-gray-50 p-4 rounded-lg shadow-sm flex items-start space-x-3 animate-fade-in">
@@ -166,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     const rewardsList = document.getElementById('rewards-list');
-    if (rewardsList && rewards.length > 0) {
+    if (rewardsList && rewards && rewards.length > 0) {
         rewards.forEach(item => {
             rewardsList.innerHTML += `
                 <div class="bg-gray-50 p-4 rounded-lg shadow-sm flex items-start space-x-3 animate-fade-in delay-100">
@@ -179,14 +173,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // --- Populate Notepad ---
-    const notepadContainer = document.getElementById('notepad-content');
-    if (notepadContainer && notepadContent) {
-        notepadContainer.innerHTML = notepadContent;
-        notepadContainer.classList.add('animate-fade-in');
-    }
+    // Populate Notepad - REMOVED
+    // const notepadContainer = document.getElementById('notepad-content');
+    // if (notepadContainer && cvData.notepadContent) { // Check if notepadContent exists
+    //     notepadContainer.innerHTML = cvData.notepadContent;
+    //     notepadContainer.classList.add('animate-fade-in');
+    // }
 
-    // --- Populate Contact Information ---
+    // Populate Contact Information
     const contactInfoContainer = document.getElementById('contact-info-details');
     if (contactInfoContainer && personalInfo.contact) {
         const { email, phone, address } = personalInfo.contact;
@@ -223,7 +217,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         contactInfoContainer.innerHTML = contactHtml;
     }
-    // Populate Social Links in Contact Section
     const socialLinksContactContainer = document.getElementById('social-links-contact');
     if (socialLinksContactContainer && personalInfo.socialLinks) {
         personalInfo.socialLinks.forEach(link => {
@@ -234,8 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-
-    // --- Populate Navigation Menus (Desktop & Mobile) ---
+    // Populate Navigation Menus
     const navMenuUl = document.querySelector('#nav-menu ul');
     const mobileMenuUl = document.querySelector('#mobile-menu ul');
     if (navigation && navMenuUl && mobileMenuUl) {
@@ -247,18 +239,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // --- Populate Footer Links ---
+    // Populate Footer Links
     const footerLinksContainer = document.getElementById('footer-links');
     if (footerLinksContainer && navigation) {
-        navigation.slice(0, 4).forEach(item => { // Show first 4 links or customize
+        navigation.slice(0, 4).forEach(item => {
              footerLinksContainer.innerHTML += `<a href="#${item.id}" class="text-gray-400 hover:text-white transition-colors text-sm">${item.name}</a>`;
         });
     }
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-
-    // --- Event Listeners & UI Enhancements ---
-    // Mobile menu toggle
+    // Event Listeners & UI Enhancements
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuButton && mobileMenu) {
@@ -267,7 +257,6 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenuButton.querySelector('i').classList.toggle('fa-bars');
             mobileMenuButton.querySelector('i').classList.toggle('fa-times');
         });
-        // Close mobile menu when a link is clicked
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
@@ -277,11 +266,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Smooth scrolling for all anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            if (href === "#") { // Link to top of page
+            if (href === "#") {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
@@ -289,16 +277,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetElement = document.querySelector(href);
             if (targetElement) {
                 e.preventDefault();
-                // const headerOffset = document.getElementById('header').offsetHeight || 70;
-                // const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                // const offsetPosition = elementPosition - headerOffset;
-                // window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
 
-    // Back to top button
     const backToTopButton = document.getElementById('back-to-top');
     if (backToTopButton) {
         window.addEventListener('scroll', () => {
@@ -315,7 +298,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Header scroll effect (optional: slight shrink or background change)
     const header = document.getElementById('header');
     if(header){
         window.addEventListener('scroll', () => {
@@ -329,20 +311,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add animations to sections when they come into view (simple version)
     const animatedElements = document.querySelectorAll('.animate-fade-in');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-                // observer.unobserve(entry.target); // Optional: stop observing after animation
             }
         });
-    }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+    }, { threshold: 0.1 });
 
     animatedElements.forEach(el => {
         observer.observe(el);
     });
-
 });
